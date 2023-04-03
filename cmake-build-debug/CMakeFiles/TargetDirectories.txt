@@ -1,9 +1,0 @@
-/home/kliperco/CLionProjects/lesta-course/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/kliperco/CLionProjects/lesta-course/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/kliperco/CLionProjects/lesta-course/cmake-build-debug/01-homework/CMakeFiles/edit_cache.dir
-/home/kliperco/CLionProjects/lesta-course/cmake-build-debug/01-homework/CMakeFiles/rebuild_cache.dir
-/home/kliperco/CLionProjects/lesta-course/cmake-build-debug/01-homework/01-1-hello-world/CMakeFiles/01-1-hello-world.dir
-/home/kliperco/CLionProjects/lesta-course/cmake-build-debug/01-homework/01-1-hello-world/CMakeFiles/edit_cache.dir
-/home/kliperco/CLionProjects/lesta-course/cmake-build-debug/01-homework/01-1-hello-world/CMakeFiles/rebuild_cache.dir
-/home/kliperco/CLionProjects/lesta-course/cmake-build-debug/01-homework/01-2-lib/CMakeFiles/edit_cache.dir
-/home/kliperco/CLionProjects/lesta-course/cmake-build-debug/01-homework/01-2-lib/CMakeFiles/rebuild_cache.dir
