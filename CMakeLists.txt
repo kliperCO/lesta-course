@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.25)
 project(lesta_course)
 
+enable_testing()
+
 set(CMAKE_CXX_STANDARD 17)
 
 SET (CMAKE_LIBRARY_OUTPUT_DIRECTORY

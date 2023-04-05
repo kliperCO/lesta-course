@@ -4,7 +4,5 @@ int main()
 {
     std::cout<<std::endl<<"Hello, World!"<<std::endl;
 
-    bool check = std::cout.good();
-
-    return check ? EXIT_SUCCESS : EXIT_FAILURE;
+    return std::cout.good() ? EXIT_SUCCESS : EXIT_FAILURE;
 }
