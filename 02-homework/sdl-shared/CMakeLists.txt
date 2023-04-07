@@ -8,7 +8,5 @@ find_library(SDL_LIBRARY
         PATHS ${CMAKE_CURRENT_LIST_DIR}/../sdl/sdl_shared_lib
         )
 
-include_directories(${SDL3_INCLUDE_DIRS})
-
 add_executable(${PROJECT_NAME} shared.cxx)
 target_link_libraries(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_LIST_DIR}/../sdl/sdl_shared_lib/libSDL3.so)
