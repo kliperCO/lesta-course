@@ -42,7 +42,7 @@ jobs:
 
       - name: Build the project using CMake
         run: |
-          cmake --preset=Release .
-          cd build/release
-          cmake --build . --config Release
+          cmake --preset=Debug .
+          cd build/Debug
+          cmake --build . --config Debug
           cd ../..
