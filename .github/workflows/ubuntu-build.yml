@@ -11,12 +11,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Install Dependencies
-      run: sudo apt-get update && sudo apt-get install -y build-essential cmake
-    - name: Build Project
-      run: |
-        mkdir build
-        cd build
-        cmake ..
-        make
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: master
+          fetch-depth: 1
+
+      - name: Update git submodules
+        run: git submodule update --init --recursive
+
+      - name: Install necessary dependencies
+        run: |
+          sudo apt-get update && sudo apt-get upgrade -y
+          sudo apt-get install -y \
+            build-essential \
+            clang \
+            cmake \
+            git \
+            ninja-build
+
+      - name: Cache C++ dependencies
+        uses: actions/cache@v2
+        id: cache-deps
+        with:
+          path: |
+            /var/cache/apt/archives/
+            /app/cache/
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/apt.conf') }}
+          restore-keys: ${{ runner.os }}-deps-
+
+      - name: Build the project using CMake
+        run: |
+          cmake --preset=Release .
+          cd build/release
+          cmake --build . --config Release
+          cd ../..
