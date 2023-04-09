@@ -1,0 +1,65 @@
+.\" This manpage content is licensed under Creative Commons
+.\"  Attribution 4.0 International (CC BY 4.0)
+.\"   https://creativecommons.org/licenses/by/4.0/
+.\" This manpage was generated from SDL's wiki page for SDL_GetQueuedAudioSize:
+.\"   https://wiki.libsdl.org/SDL_GetQueuedAudioSize
+.\" Generated with SDL/build-scripts/wikiheaders.pl
+.\"  revision 60dcaff7eb25a01c9c87a5fed335b29a5625b95b
+.\" Please report issues in this manpage's content at:
+.\"   https://github.com/libsdl-org/sdlwiki/issues/new
+.\" Please report issues in the generation of this manpage from the wiki at:
+.\"   https://github.com/libsdl-org/SDL/issues/new?title=Misgenerated%20manpage%20for%20SDL_GetQueuedAudioSize
+.\" SDL can be found at https://libsdl.org/
+.de URL
+\$2 \(laURL: \$1 \(ra\$3
+..
+.if \n[.g] .mso www.tmac
+.TH SDL_GetQueuedAudioSize 3 "SDL 3.0.0" "SDL" "SDL3 FUNCTIONS"
+.SH NAME
+SDL_GetQueuedAudioSize \- Get the number of bytes of still-queued audio\[char46]
+.SH SYNOPSIS
+.nf
+.B #include \(dqSDL3/SDL.h\(dq
+.PP
+.BI "Uint32 SDL_GetQueuedAudioSize(SDL_AudioDeviceID dev);
+.fi
+.SH DESCRIPTION
+For playback devices: this is the number of bytes that have been queued for
+playback with 
+.BR SDL_QueueAudio
+(), but have not yet been
+sent to the hardware\[char46]
+
+Once we've sent it to the hardware, this function can not decide the exact
+byte boundary of what has been played\[char46] It's possible that we just gave the
+hardware several kilobytes right before you called this function, but it
+hasn't played any of it yet, or maybe half of it, etc\[char46]
+
+For capture devices, this is the number of bytes that have been captured by
+the device and are waiting for you to dequeue\[char46] This number may grow at any
+time, so this only informs of the lower-bound of available data\[char46]
+
+You may not queue or dequeue audio on a device that is using an
+application-supplied callback; calling this function on such a device
+always returns 0\[char46] You have to use the audio callback or queue audio, but
+not both\[char46]
+
+You should not call 
+.BR SDL_LockAudio
+() on the device before
+querying; SDL handles locking internally for this function\[char46]
+
+.SH FUNCTION PARAMETERS
+.TP
+.I dev
+the device ID of which we will query queued audio size
+.SH RETURN VALUE
+Returns the number of bytes (not samples!) of queued audio\[char46]
+
+.SH AVAILABILITY
+This function is available since SDL 3\[char46]0\[char46]0\[char46]
+
+.SH SEE ALSO
+.BR SDL_ClearQueuedAudio (3),
+.BR SDL_QueueAudio (3),
+.BR SDL_DequeueAudio (3)

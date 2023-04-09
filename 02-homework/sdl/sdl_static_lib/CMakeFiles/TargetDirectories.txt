@@ -1,0 +1,12 @@
+/home/kliperco/CLionProjects/lesta-course/02-homework/sdl/sdl_static/CMakeFiles/SDL3-static.dir
+/home/kliperco/CLionProjects/lesta-course/02-homework/sdl/sdl_static/CMakeFiles/SDL3_test.dir
+/home/kliperco/CLionProjects/lesta-course/02-homework/sdl/sdl_static/CMakeFiles/SDL3_docs.dir
+/home/kliperco/CLionProjects/lesta-course/02-homework/sdl/sdl_static/CMakeFiles/uninstall.dir
+/home/kliperco/CLionProjects/lesta-course/02-homework/sdl/sdl_static/CMakeFiles/package.dir
+/home/kliperco/CLionProjects/lesta-course/02-homework/sdl/sdl_static/CMakeFiles/package_source.dir
+/home/kliperco/CLionProjects/lesta-course/02-homework/sdl/sdl_static/CMakeFiles/edit_cache.dir
+/home/kliperco/CLionProjects/lesta-course/02-homework/sdl/sdl_static/CMakeFiles/rebuild_cache.dir
+/home/kliperco/CLionProjects/lesta-course/02-homework/sdl/sdl_static/CMakeFiles/list_install_components.dir
+/home/kliperco/CLionProjects/lesta-course/02-homework/sdl/sdl_static/CMakeFiles/install.dir
+/home/kliperco/CLionProjects/lesta-course/02-homework/sdl/sdl_static/CMakeFiles/install/local.dir
+/home/kliperco/CLionProjects/lesta-course/02-homework/sdl/sdl_static/CMakeFiles/install/strip.dir

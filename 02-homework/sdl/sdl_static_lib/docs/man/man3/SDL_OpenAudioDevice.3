@@ -1,0 +1,223 @@
+.\" This manpage content is licensed under Creative Commons
+.\"  Attribution 4.0 International (CC BY 4.0)
+.\"   https://creativecommons.org/licenses/by/4.0/
+.\" This manpage was generated from SDL's wiki page for SDL_OpenAudioDevice:
+.\"   https://wiki.libsdl.org/SDL_OpenAudioDevice
+.\" Generated with SDL/build-scripts/wikiheaders.pl
+.\"  revision 60dcaff7eb25a01c9c87a5fed335b29a5625b95b
+.\" Please report issues in this manpage's content at:
+.\"   https://github.com/libsdl-org/sdlwiki/issues/new
+.\" Please report issues in the generation of this manpage from the wiki at:
+.\"   https://github.com/libsdl-org/SDL/issues/new?title=Misgenerated%20manpage%20for%20SDL_OpenAudioDevice
+.\" SDL can be found at https://libsdl.org/
+.de URL
+\$2 \(laURL: \$1 \(ra\$3
+..
+.if \n[.g] .mso www.tmac
+.TH SDL_OpenAudioDevice 3 "SDL 3.0.0" "SDL" "SDL3 FUNCTIONS"
+.SH NAME
+SDL_OpenAudioDevice \- Open a specific audio device\[char46]
+.SH SYNOPSIS
+.nf
+.B #include \(dqSDL3/SDL.h\(dq
+.PP
+.BI "SDL_AudioDeviceID SDL_OpenAudioDevice(
+.BI "                          const char *device,
+.BI "                          int iscapture,
+.BI "                          const SDL_AudioSpec *desired,
+.BI "                          SDL_AudioSpec *obtained,
+.BI "                          int allowed_changes);
+.fi
+.SH DESCRIPTION
+Passing in a
+.BR device
+name of NULL requests the most reasonable default\[char46]
+The
+.BR device
+name is a UTF-8 string reported by
+
+.BR SDL_GetAudioDeviceName
+(), but some drivers allow
+arbitrary and driver-specific strings, such as a hostname/IP address for a
+remote audio server, or a filename in the diskaudio driver\[char46]
+
+An opened audio device starts out paused, and should be enabled for playing
+by calling 
+.BR SDL_PlayAudioDevice
+(devid) when you are
+ready for your audio callback function to be called\[char46] Since the audio driver
+may modify the requested size of the audio buffer, you should allocate any
+local mixing buffers after you open the audio device\[char46]
+
+The audio callback runs in a separate thread in most cases; you can prevent
+race conditions between your callback and other threads without fully
+pausing playback with 
+.BR SDL_LockAudioDevice
+()\[char46] For
+more information about the callback, see 
+.BR SDL_AudioSpec
+\[char46]
+
+Managing the audio spec via 'desired' and 'obtained':
+
+When filling in the desired audio spec structure:
+
+-
+.BR desired->freq
+should be the frequency in sample-frames-per-second (Hz)\[char46]
+-
+.BR desired->format
+should be the audio format
+  (
+.BR
+.BR AUDIO_S16SYS
+, etc)\[char46]
+-
+.BR desired->samples
+is the desired size of the audio buffer, in _sample
+  frames_ (with stereo output, two samples--left and right--would make a
+  single sample frame)\[char46] This number should be a power of two, and may be
+  adjusted by the audio driver to a value more suitable for the hardware\[char46]
+  Good values seem to range between 512 and 8096 inclusive, depending on
+  the application and CPU speed\[char46] Smaller values reduce latency, but can
+  lead to underflow if the application is doing heavy processing and cannot
+  fill the audio buffer in time\[char46] Note that the number of sample frames is
+  directly related to time by the following formula:
+.BR ms =
+  (sampleframes
+.I 1000)/freq
+-
+.BR desired->size
+is the size in _bytes_ of the audio buffer, and is
+  calculated by 
+.BR SDL_OpenAudioDevice
+()\[char46] You don't
+  initialize this\[char46]
+-
+.BR desired->silence
+is the value used to set the buffer to silence, and is
+  calculated by 
+.BR SDL_OpenAudioDevice
+()\[char46] You don't
+  initialize this\[char46]
+-
+.BR desired->callback
+should be set to a function that will be called when
+  the audio device is ready for more data\[char46] It is passed a pointer to the
+  audio buffer, and the length in bytes of the audio buffer\[char46] This function
+  usually runs in a separate thread, and so you should protect data
+  structures that it accesses by calling
+  
+.BR SDL_LockAudioDevice
+() and
+  
+.BR SDL_UnlockAudioDevice
+() in your code\[char46]
+  Alternately, you may pass a NULL pointer here, and call
+  
+.BR SDL_QueueAudio
+() with some frequency, to queue more
+  audio samples to be played (or for capture devices, call
+  
+.BR SDL_DequeueAudio
+() with some frequency, to obtain
+  audio samples)\[char46]
+-
+.BR desired->userdata
+is passed as the first parameter to your callback
+  function\[char46] If you passed a NULL callback, this value is ignored\[char46]
+.BR allowed_changes
+can have the following flags OR'd together:
+
+
+\(bu 
+.BR
+.BR SDL_AUDIO_ALLOW_FREQUENCY_CHANGE
+
+\(bu 
+.BR
+.BR SDL_AUDIO_ALLOW_FORMAT_CHANGE
+
+\(bu 
+.BR
+.BR SDL_AUDIO_ALLOW_CHANNELS_CHANGE
+
+\(bu 
+.BR
+.BR SDL_AUDIO_ALLOW_SAMPLES_CHANGE
+
+\(bu 
+.BR
+.BR SDL_AUDIO_ALLOW_ANY_CHANGE
+These flags specify how SDL should behave when a device cannot offer a
+specific feature\[char46] If the application requests a feature that the hardware
+doesn't offer, SDL will always try to get the closest equivalent\[char46]
+
+For example, if you ask for float32 audio format, but the sound card only
+supports int16, SDL will set the hardware to int16\[char46] If you had set
+
+.BR SDL_AUDIO_ALLOW_FORMAT_CHANGE
+, SDL will
+change the format in the
+.BR obtained
+structure\[char46] If that flag was 
+not* set,
+SDL will prepare to convert your callback's float32 audio to int16 before
+feeding it to the hardware and will keep the originally requested format in
+the
+.BR obtained
+structure\[char46]
+
+The resulting audio specs, varying depending on hardware and on what
+changes were allowed, will then be written back to
+.BR obtained
+\[char46]
+
+If your application can only handle one specific data format, pass a zero
+for
+.BR allowed_changes
+and let SDL transparently handle any differences\[char46]
+
+.SH FUNCTION PARAMETERS
+.TP
+.I device
+a UTF-8 string reported by 
+.BR SDL_GetAudioDeviceName
+() or a driver-specific name as appropriate\[char46] NULL requests the most reasonable default device\[char46]
+.TP
+.I iscapture
+non-zero to specify a device should be opened for recording, not playback
+.TP
+.I desired
+an 
+.BR SDL_AudioSpec
+ structure representing the desired output format
+.TP
+.I obtained
+an 
+.BR SDL_AudioSpec
+ structure filled in with the actual output format
+.TP
+.I allowed_changes
+0, or one or more flags OR'd together
+.SH RETURN VALUE
+Returns a valid device ID that is > 0 on success or 0 on failure; call
+
+.BR SDL_GetError
+() for more information\[char46]
+
+For compatibility with SDL 1\[char46]2, this will never return 1, since SDL
+reserves that ID for the legacy 
+.BR SDL_OpenAudio
+() function\[char46]
+
+.SH AVAILABILITY
+This function is available since SDL 3\[char46]0\[char46]0\[char46]
+
+.SH SEE ALSO
+.BR SDL_CloseAudioDevice (3),
+.BR SDL_GetAudioDeviceName (3),
+.BR SDL_LockAudioDevice (3),
+.BR SDL_PlayAudioDevice (3),
+.BR SDL_PauseAudioDevice (3),
+.BR SDL_UnlockAudioDevice (3)
