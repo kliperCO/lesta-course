@@ -24,6 +24,7 @@ jobs:
         run: |
           git clone https://github.com/libsdl-org/SDL.git
           cd SDL
+          build -> cd build -> cmake ..
           cmake .
           sudo cmake --build . --target install
           sudo apt-get update && sudo apt-get upgrade -y
