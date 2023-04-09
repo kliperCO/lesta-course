@@ -1,0 +1,65 @@
+.\" This manpage content is licensed under Creative Commons
+.\"  Attribution 4.0 International (CC BY 4.0)
+.\"   https://creativecommons.org/licenses/by/4.0/
+.\" This manpage was generated from SDL's wiki page for SDL_RenderFlush:
+.\"   https://wiki.libsdl.org/SDL_RenderFlush
+.\" Generated with SDL/build-scripts/wikiheaders.pl
+.\"  revision 60dcaff7eb25a01c9c87a5fed335b29a5625b95b
+.\" Please report issues in this manpage's content at:
+.\"   https://github.com/libsdl-org/sdlwiki/issues/new
+.\" Please report issues in the generation of this manpage from the wiki at:
+.\"   https://github.com/libsdl-org/SDL/issues/new?title=Misgenerated%20manpage%20for%20SDL_RenderFlush
+.\" SDL can be found at https://libsdl.org/
+.de URL
+\$2 \(laURL: \$1 \(ra\$3
+..
+.if \n[.g] .mso www.tmac
+.TH SDL_RenderFlush 3 "SDL 3.0.0" "SDL" "SDL3 FUNCTIONS"
+.SH NAME
+SDL_RenderFlush \- Force the rendering context to flush any pending commands to the underlying rendering API\[char46]
+.SH SYNOPSIS
+.nf
+.B #include \(dqSDL3/SDL.h\(dq
+.PP
+.BI "int SDL_RenderFlush(SDL_Renderer *renderer);
+.fi
+.SH DESCRIPTION
+You do not need to (and in fact, shouldn't) call this function unless you
+are planning to call into OpenGL/Direct3D/Metal/whatever directly in
+addition to using an 
+.BR SDL_Renderer
+\[char46]
+
+This is for a very-specific case: if you are using SDL's render API, you
+asked for a specific renderer backend (OpenGL, Direct3D, etc), you set
+
+.BR SDL_HINT_RENDER_BATCHING
+ to "1", and you plan
+to make OpenGL/D3D/whatever calls in addition to SDL render API calls\[char46] If
+all of this applies, you should call 
+.BR SDL_RenderFlush
+()
+between calls to SDL's render API and the low-level API you're using in
+cooperation\[char46]
+
+In all other cases, you can ignore this function\[char46] This is only here to get
+maximum performance out of a specific situation\[char46] In all other cases, SDL
+will do the right thing, perhaps at a performance loss\[char46]
+
+This function is first available in SDL 2\[char46]0\[char46]10, and is not needed in 2\[char46]0\[char46]9
+and earlier, as earlier versions did not queue rendering commands at all,
+instead flushing them to the OS immediately\[char46]
+
+.SH FUNCTION PARAMETERS
+.TP
+.I renderer
+the rendering context
+.SH RETURN VALUE
+Returns 0 on success or a negative error code on failure; call
+
+.BR SDL_GetError
+() for more information\[char46]
+
+.SH AVAILABILITY
+This function is available since SDL 3\[char46]0\[char46]0\[char46]
+
