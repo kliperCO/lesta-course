@@ -3,7 +3,7 @@
 <div align="center" style="text-align: center;">
   <div>
     <a href="https://github.com/kliperCO/lesta-course/issues">
-      <img src="https://img.shields.io/github/issues-raw/kliperCO/lesta-course/?style=for-the-badge" alt="GitHub Issues">
+      <img src="https://img.shields.io/github/issues-raw/kliperCO/lesta-course?style=for-the-badge" alt="GitHub Issues">
     </a>
        <img src="https://img.shields.io/badge/platform-linux%20-informational?style=for-the-badge&amp;logo=appveyor" alt="Platforms">    
     <a href="https://en.cppreference.com/w/cpp/23">
