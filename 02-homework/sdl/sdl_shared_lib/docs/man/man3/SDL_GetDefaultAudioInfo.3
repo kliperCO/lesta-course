@@ -1,0 +1,76 @@
+.\" This manpage content is licensed under Creative Commons
+.\"  Attribution 4.0 International (CC BY 4.0)
+.\"   https://creativecommons.org/licenses/by/4.0/
+.\" This manpage was generated from SDL's wiki page for SDL_GetDefaultAudioInfo:
+.\"   https://wiki.libsdl.org/SDL_GetDefaultAudioInfo
+.\" Generated with SDL/build-scripts/wikiheaders.pl
+.\"  revision 60dcaff7eb25a01c9c87a5fed335b29a5625b95b
+.\" Please report issues in this manpage's content at:
+.\"   https://github.com/libsdl-org/sdlwiki/issues/new
+.\" Please report issues in the generation of this manpage from the wiki at:
+.\"   https://github.com/libsdl-org/SDL/issues/new?title=Misgenerated%20manpage%20for%20SDL_GetDefaultAudioInfo
+.\" SDL can be found at https://libsdl.org/
+.de URL
+\$2 \(laURL: \$1 \(ra\$3
+..
+.if \n[.g] .mso www.tmac
+.TH SDL_GetDefaultAudioInfo 3 "SDL 3.0.0" "SDL" "SDL3 FUNCTIONS"
+.SH NAME
+SDL_GetDefaultAudioInfo \- Get the name and preferred format of the default audio device\[char46]
+.SH SYNOPSIS
+.nf
+.B #include \(dqSDL3/SDL.h\(dq
+.PP
+.BI "int SDL_GetDefaultAudioInfo(char **name,
+.BI "                            SDL_AudioSpec *spec,
+.BI "                            int iscapture);
+.fi
+.SH DESCRIPTION
+Some (but not all!) platforms have an isolated mechanism to get information
+about the "default" device\[char46] This can actually be a completely different
+device that's not in the list you get from
+
+.BR SDL_GetAudioDeviceSpec
+()\[char46] It can even be a
+network address! (This is discussed in
+
+.BR SDL_OpenAudioDevice
+()\[char46])
+
+As a result, this call is not guaranteed to be performant, as it can query
+the sound server directly every time, unlike the other query functions\[char46] You
+should call this function sparingly!
+.BR spec
+will be filled with the sample rate, sample format, and channel
+count, if a default device exists on the system\[char46] If
+.BR name
+is provided,
+will be filled with either a dynamically-allocated UTF-8 string or NULL\[char46]
+
+.SH FUNCTION PARAMETERS
+.TP
+.I name
+A pointer to be filled with the name of the default device (can be NULL)\[char46] Please call 
+.BR SDL_free
+() when you are done with this pointer!
+.TP
+.I spec
+The 
+.BR SDL_AudioSpec
+ to be initialized by this function\[char46]
+.TP
+.I iscapture
+non-zero to query the default recording device, zero to query the default output device\[char46]
+.SH RETURN VALUE
+Returns 0 on success or a negative error code on failure; call
+
+.BR SDL_GetError
+() for more information\[char46]
+
+.SH AVAILABILITY
+This function is available since SDL 3\[char46]0\[char46]0\[char46]
+
+.SH SEE ALSO
+.BR SDL_GetAudioDeviceName (3),
+.BR SDL_GetAudioDeviceSpec (3),
+.BR SDL_OpenAudioDevice (3)

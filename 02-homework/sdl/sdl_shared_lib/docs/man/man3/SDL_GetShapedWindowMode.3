@@ -1,0 +1,55 @@
+.\" This manpage content is licensed under Creative Commons
+.\"  Attribution 4.0 International (CC BY 4.0)
+.\"   https://creativecommons.org/licenses/by/4.0/
+.\" This manpage was generated from SDL's wiki page for SDL_GetShapedWindowMode:
+.\"   https://wiki.libsdl.org/SDL_GetShapedWindowMode
+.\" Generated with SDL/build-scripts/wikiheaders.pl
+.\"  revision 60dcaff7eb25a01c9c87a5fed335b29a5625b95b
+.\" Please report issues in this manpage's content at:
+.\"   https://github.com/libsdl-org/sdlwiki/issues/new
+.\" Please report issues in the generation of this manpage from the wiki at:
+.\"   https://github.com/libsdl-org/SDL/issues/new?title=Misgenerated%20manpage%20for%20SDL_GetShapedWindowMode
+.\" SDL can be found at https://libsdl.org/
+.de URL
+\$2 \(laURL: \$1 \(ra\$3
+..
+.if \n[.g] .mso www.tmac
+.TH SDL_GetShapedWindowMode 3 "SDL 3.0.0" "SDL" "SDL3 FUNCTIONS"
+.SH NAME
+SDL_GetShapedWindowMode \- Get the shape parameters of a shaped window\[char46]
+.SH SYNOPSIS
+.nf
+.B #include \(dqSDL3/SDL.h\(dq
+.PP
+.BI "int SDL_GetShapedWindowMode(SDL_Window *window,SDL_WindowShapeMode *shape_mode);
+.fi
+.SH FUNCTION PARAMETERS
+.TP
+.I window
+The shaped window whose parameters should be retrieved\[char46]
+.TP
+.I shape_mode
+An empty shape-mode structure to fill, or NULL to check whether the window has a shape\[char46]
+.SH RETURN VALUE
+Returns 0 if the window has a shape and, provided shape_mode was not NULL,
+shape_mode has been filled with the mode data,
+
+.BR SDL_NONSHAPEABLE_WINDOW
+ if the
+
+.BR SDL_Window
+ given is not a shaped window, or
+
+.BR SDL_WINDOW_LACKS_SHAPE
+ if the
+
+.BR SDL_Window
+ given is a shapeable window currently lacking a
+shape\[char46]
+
+.SH AVAILABILITY
+This function is available since SDL 3\[char46]0\[char46]0\[char46]
+
+.SH SEE ALSO
+.BR SDL_WindowShapeMode (3),
+.BR SDL_SetWindowShape (3)

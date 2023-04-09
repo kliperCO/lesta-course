@@ -1,0 +1,89 @@
+.\" This manpage content is licensed under Creative Commons
+.\"  Attribution 4.0 International (CC BY 4.0)
+.\"   https://creativecommons.org/licenses/by/4.0/
+.\" This manpage was generated from SDL's wiki page for SDL_DequeueAudio:
+.\"   https://wiki.libsdl.org/SDL_DequeueAudio
+.\" Generated with SDL/build-scripts/wikiheaders.pl
+.\"  revision 60dcaff7eb25a01c9c87a5fed335b29a5625b95b
+.\" Please report issues in this manpage's content at:
+.\"   https://github.com/libsdl-org/sdlwiki/issues/new
+.\" Please report issues in the generation of this manpage from the wiki at:
+.\"   https://github.com/libsdl-org/SDL/issues/new?title=Misgenerated%20manpage%20for%20SDL_DequeueAudio
+.\" SDL can be found at https://libsdl.org/
+.de URL
+\$2 \(laURL: \$1 \(ra\$3
+..
+.if \n[.g] .mso www.tmac
+.TH SDL_DequeueAudio 3 "SDL 3.0.0" "SDL" "SDL3 FUNCTIONS"
+.SH NAME
+SDL_DequeueAudio \- Dequeue more audio on non-callback devices\[char46]
+.SH SYNOPSIS
+.nf
+.B #include \(dqSDL3/SDL.h\(dq
+.PP
+.BI "Uint32 SDL_DequeueAudio(SDL_AudioDeviceID dev, void *data, Uint32 len);
+.fi
+.SH DESCRIPTION
+If you are looking to queue audio for output on a non-callback playback
+device, you want 
+.BR SDL_QueueAudio
+() instead\[char46]
+
+.BR SDL_DequeueAudio
+() will always return 0 if you use it
+with playback devices\[char46]
+
+SDL offers two ways to retrieve audio from a capture device: you can either
+supply a callback that SDL triggers with some frequency as the device
+records more audio data, (push method), or you can supply no callback, and
+then SDL will expect you to retrieve data at regular intervals (pull
+method) with this function\[char46]
+
+There are no limits on the amount of data you can queue, short of
+exhaustion of address space\[char46] Data from the device will keep queuing as
+necessary without further intervention from you\[char46] This means you will
+eventually run out of memory if you aren't routinely dequeueing data\[char46]
+
+Capture devices will not queue data when paused; if you are expecting to
+not need captured audio for some length of time, use
+
+.BR SDL_PauseAudioDevice
+() to stop the capture device
+from queueing more data\[char46] This can be useful during, say, level loading
+times\[char46] When unpaused, capture devices will start queueing data from that
+point, having flushed any capturable data available while paused\[char46]
+
+This function is thread-safe, but dequeueing from the same device from two
+threads at once does not promise which thread will dequeue data first\[char46]
+
+You may not dequeue audio from a device that is using an
+application-supplied callback; doing so returns an error\[char46] You have to use
+the audio callback, or dequeue audio with this function, but not both\[char46]
+
+You should not call 
+.BR SDL_LockAudio
+() on the device before
+dequeueing; SDL handles locking internally for this function\[char46]
+
+.SH FUNCTION PARAMETERS
+.TP
+.I dev
+the device ID from which we will dequeue audio
+.TP
+.I data
+a pointer into where audio data should be copied
+.TP
+.I len
+the number of bytes (not samples!) to which (data) points
+.SH RETURN VALUE
+Returns the number of bytes dequeued, which could be less than requested;
+call 
+.BR SDL_GetError
+() for more information\[char46]
+
+.SH AVAILABILITY
+This function is available since SDL 3\[char46]0\[char46]0\[char46]
+
+.SH SEE ALSO
+.BR SDL_ClearQueuedAudio (3),
+.BR SDL_GetQueuedAudioSize (3)
