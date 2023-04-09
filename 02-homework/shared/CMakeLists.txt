@@ -14,5 +14,5 @@ find_library(SDL_LIBRARY
 
 add_executable(${PROJECT_NAME} shared_main.cxx)
 target_link_libraries(${PROJECT_NAME} PUBLIC
-        ${CMAKE_CURRENT_LIST_DIR}/../sdl/sdl_shared_lib/libSDL3.so.0.0.0
+        ${CMAKE_CURRENT_LIST_DIR}/../sdl/sdl_shared_lib/libSDL3.so
         )
