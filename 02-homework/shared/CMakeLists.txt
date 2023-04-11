@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.24...3.25)
 
 project(shared)
 
+set(CMAKE_CXX_STANDARD 23)
+
 set(CMAKE_INCLUDE_PATH
         ${CMAKE_INCLUDE_PATH}
         ${CMAKE_CURRENT_LIST_DIR}/../sdl/sdl_shared_lib/include
