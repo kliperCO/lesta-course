@@ -12,7 +12,7 @@ find_library(SDL_LIBRARY
         PATHS ${CMAKE_CURRENT_LIST_DIR}/../sdl/sdl_static_lib
         )
 
-add_executable(${PROJECT_NAME} static-main.cxx)
+add_executable(${PROJECT_NAME} static_main.cxx)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}/../sdl/sdl_static_lib/libSDL3.a

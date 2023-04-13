@@ -2,10 +2,12 @@
   "version": 3,
   "cmakeMinimumRequired": {
     "major": 3,
-    "minor": 25,
+    "minor": 24,
     "patch": 0
   },
-  "configurePresets": [
+
+  "configurePresets":
+  [
     {
       "name": "Debug",
       "displayName": "Debug",
@@ -21,44 +23,7 @@
         "CMAKE_C_FLAGS_DEBUG": "-fsanitize=address,undefined"
       }
     },
-    {
-      "name": "Valgrind",
-      "displayName": "Valgrind",
-      "description": "Debug build with assertions, debug info, and additional debugging options optimized for Valgrind.",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build/valgrind",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_CXX_FLAGS": "-Og -g -Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function",
-        "CMAKE_C_FLAGS": "-Og -g -Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "CMAKE_CXX_FLAGS_DEBUG": "-fsanitize=address,undefined",
-        "CMAKE_C_FLAGS_DEBUG": "-fsanitize=address,undefined",
-        "CMAKE_CXX_FLAGS_RELEASE": "-O3 -DNDEBUG",
-        "CMAKE_C_FLAGS_RELEASE": "-O3 -DNDEBUG",
-        "CMAKE_CXX_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG",
-        "CMAKE_C_FLAGS_RELWITHDEBINFO": "-O2 -g -DNDEBUG",
-        "CMAKE_CXX_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
-        "CMAKE_C_FLAGS_MINSIZEREL": "-Os -DNDEBUG",
-        "VALGRIND": "valgrind --leak-check=full --show-leak-kinds=all"
-      }
-    },
-    {
-      "name": "Test",
-      "displayName": "Test",
-      "description": "Build with tests and extra checks",
-      "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build/test",
-      "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release",
-        "CMAKE_CXX_FLAGS": "-Ofast -DNDEBUG -march=native -Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function",
-        "CMAKE_C_FLAGS": "-Ofast -DNDEBUG -march=native -Wall -Wextra -Wpedantic -Wconversion -Wno-unused-function",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "CMAKE_CXX_FLAGS_RELEASE": "-fsanitize=address,undefined",
-        "CMAKE_C_FLAGS_RELEASE": "-fsanitize=address,undefined",
-        "BUILD_TESTS": "ON"
-      }
-    },
+
     {
       "name": "Release",
       "displayName": "Release",
