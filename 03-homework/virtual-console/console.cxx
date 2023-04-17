@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
 
     if (init_result != 0) {
         const char *err_message = SDL_GetError();
-        std::cerr << "error: failed call SDL_Init: " << err_message << std::endl;
+        std::cerr << "Error: failed call SDL_Init: " << err_message << std::endl;
         return EXIT_FAILURE;
     }
 
@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
 
     if (!no_window && window == nullptr) {
         const char *err_message = SDL_GetError();
-        std::cerr << "error: failed call SDL_CreateWindow: " << err_message << std::endl;
+        std::cerr << "Error: failed call SDL_CreateWindow: " << err_message << std::endl;
         SDL_Quit();
         return EXIT_FAILURE;
     }
