@@ -6,15 +6,18 @@
     <a href="https://en.cppreference.com/w/cpp/23">
       <img src="https://img.shields.io/badge/cpp-23-informational?style=for-the-badge&amp;logo=cplusplus" alt="CPP version">
     </a>
+    <a href="https://github.com/kliperCO/lesta-course/issues">
+      <img src="https://img.shields.io/github/issues-raw/kliperCO/lesta-course?style=for-the-badge">
+    </a>
   </div>
 </div>
 
 
 # Course status
 
-| Task         | Build Status                                                                                                                                                                                                           | Issues                                                                                                                                           |
-|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| Homework № 1 | No info                                                                                                                                                                                                                | No info                                                                                                                                          |
-| Homework № 2 | [![Ubuntu](https://img.shields.io/github/actions/workflow/status/kliperCO/lesta-course/ubuntu-build.yml?logo=ubuntu&style=for-the-badge)](https://github.com/kliperCO/lesta-course/actions/workflows/ubuntu-build.yml) | [![Ubuntu](https://img.shields.io/github/issues-raw/kliperCO/lesta-course?style=for-the-badge)](https://github.com/kliperCO/lesta-course/issues) |
-| Homework № 3 | No info                                                                                                                                                                                                                | No info                                                                                                                                          |
+| Task         | Build Status                                                                                                                                                                                                           | Black Mark |
+|--------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| Homework № 1 | No info                                                                                                                                                                                                                | ✔          |
+| Homework № 2 | [![Ubuntu](https://img.shields.io/github/actions/workflow/status/kliperCO/lesta-course/ubuntu-build.yml?logo=ubuntu&style=for-the-badge)](https://github.com/kliperCO/lesta-course/actions/workflows/ubuntu-build.yml) | ×          |
+| Homework № 3 | [![Ubuntu](https://img.shields.io/github/actions/workflow/status/kliperCO/lesta-course/ubuntu-build.yml?logo=ubuntu&style=for-the-badge)](https://github.com/kliperCO/lesta-course/actions/workflows/ubuntu-build.yml) | No info    |
                                                                                                                                                                                                                                                                                                                                                                     
