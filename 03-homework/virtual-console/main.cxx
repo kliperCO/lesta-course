@@ -7,30 +7,28 @@
 #pragma pack(push, 4)
 struct bind
 {
-    SDL_Keycode      key;
+    SDL_Keycode key;
     std::string_view name;
 };
 #pragma pack(pop)
 
 void check_input(const SDL_Event& e)
 {
-
     // SUP Game Box Plus
     const std::array<::bind, 10> keys{ {
-                                              { SDLK_w, "up" },
-                                              { SDLK_a, "left" },
-                                              { SDLK_s, "down" },
-                                              { SDLK_d, "right" },
+                                              { SDLK_w, "button_up" },
+                                              { SDLK_a, "button_left" },
+                                              { SDLK_s, "button_down" },
+                                              { SDLK_d, "button_right" },
                                               { SDLK_LEFT, "button_y" },
                                               { SDLK_UP, "button_x" },
                                               { SDLK_RIGHT, "button_a" },
                                               { SDLK_DOWN, "button_b" },
-                                              { SDLK_f, "select" },
-                                              { SDLK_RETURN, "start" }
+                                              { SDLK_f, "button_select" },
+                                              { SDLK_RETURN, "button_start" }
                                       } };
 
-    const auto it =
-            std::find_if(begin(keys),
+    const auto it = std::find_if(begin(keys),
                          end(keys),
                          [&](const ::bind& b) { return b.key == e.key.keysym.sym; });
 
@@ -98,13 +96,10 @@ int main(int argc, char *argv[]) {
                 case SDL_EVENT_QUIT:
                     event_work = false;
                     break;
-//                case SDL_EVENT_KEY_DOWN:
-//                    [[fallthrough]];
-//                    //std::cout << "Key pressed: " << SDL_GetKeyName(event.key.keysym.sym) << std::endl;
-//                    //break;
+                case SDL_EVENT_KEY_DOWN:
+                    [[fallthrough]];
                 case SDL_EVENT_KEY_UP:
                     check_input(event);
-                    //std::cout << "Key pressed: " << SDL_GetKeyName(event.key.keysym.sym) << std::endl;
                     break;
                 default:
                     break;
