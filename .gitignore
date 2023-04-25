@@ -1,0 +1,29 @@
+# Игнорировать файлы объектных кодов и исполняемых файлов
+*.o
+*.out
+*.exe
+
+# Игнорировать директории, созданные компилятором
+build/
+cmake-build-debug/
+CMakeFiles/
+Debug/
+Release/
+
+# Игнорировать все файлы, созданные CLion
+.idea/
+
+# Игнорировать файлы настроек проекта CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+install_manifest.txt
+
+# Игнорировать файлы логов сборки
+*.log
+
+# Игнорировать файлы автоматически генерируемые SDL
+sdl3-config
+SDL3.dll
+SDL3_test/
